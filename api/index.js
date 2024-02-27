@@ -3,18 +3,29 @@ dotenv.config();
 import express from "express";
 import connectDB from "../api/db/conn.js";
 import userRoutes from "./routes/user.route.js";
-import authroutes from "./routes/auth.route.js";
+import authRoutes from "./routes/auth.route.js";
 
 connectDB();
 
 const app = express();
 app.use(express.json());
 
-//routes
-app.use("/api/user", userRoutes);
-app.use("/api/auth", authroutes);
+// Error handling middleware
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "Internal server error";
+  res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message,
+  });
+});
 
-const PORT = process.env.PORT;
+// Routes
+app.use("/api/user", userRoutes);
+app.use("/api/auth", authRoutes);
+
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Node server running on port ${process.env.PORT}`);
+  console.log(`Node server running on port ${PORT}`);
 });

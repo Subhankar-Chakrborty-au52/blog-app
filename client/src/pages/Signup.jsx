@@ -120,7 +120,7 @@ const Signup = () => {
               )}
             </Button>
           </form>
-          <div>
+          <div className="mt-5">
             <span>Have an account?</span>
             <Link to="/sign-in" className="text-blue-500">
               Sign In

@@ -42,8 +42,7 @@ export const signup = async (req, res, next) => {
   }
 };
 
-// login
-
+// login user
 export const signin = async (req, res, next) => {
   const { email, password } = req.body;
   if (!email || !password || email === "" || password === "") {
@@ -80,7 +79,6 @@ export const signin = async (req, res, next) => {
 };
 
 // google auth
-
 export const google = async (req, res, next) => {
   const { email, name, googlePhotoUrl } = req.body;
   try {

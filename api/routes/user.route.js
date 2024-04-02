@@ -1,15 +1,28 @@
-import express from "express";
+import express from "express"; // Import the Express framework
 import {
   test,
   updateUser,
   deleteUser,
-} from "../controllers/user.controller.js";
-import { verifyToken } from "../utils/verifyUser.js";
+  signout,
+} from "../controllers/user.controller.js"; // Import controller functions for user routes
+import { verifyToken } from "../utils/verifyUser.js"; // Import middleware function for verifying user tokens
 
-const router = express.Router();
+const router = express.Router(); // Create an instance of Express Router
 
+// Define routes for user-related operations
+
+// Route to test endpoint functionality
 router.get("/test", test);
+
+// Route to update user information
+// Requires token verification middleware before executing the updateUser controller function
 router.put("/update/:userId", verifyToken, updateUser);
+
+// Route to delete user account
+// Requires token verification middleware before executing the deleteUser controller function
 router.delete("/delete/:userId", verifyToken, deleteUser);
 
-export default router;
+//signout
+router.post("/signout", signout);
+
+export default router; // Export the router for use in other parts of the application

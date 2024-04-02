@@ -80,3 +80,15 @@ export const deleteUser = async (req, res, next) => {
     next(error); // Forward any errors to the error handling middleware
   }
 };
+
+//signout
+export const signout = (req, res, next) => {
+  try {
+    res
+      .clearCookie("access_token")
+      .status(200)
+      .json("User has been signed out");
+  } catch (error) {
+    next(error);
+  }
+};

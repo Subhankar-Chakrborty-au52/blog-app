@@ -3,6 +3,7 @@ import {
   test,
   updateUser,
   deleteUser,
+  signout,
 } from "../controllers/user.controller.js"; // Import controller functions for user routes
 import { verifyToken } from "../utils/verifyUser.js"; // Import middleware function for verifying user tokens
 
@@ -20,5 +21,8 @@ router.put("/update/:userId", verifyToken, updateUser);
 // Route to delete user account
 // Requires token verification middleware before executing the deleteUser controller function
 router.delete("/delete/:userId", verifyToken, deleteUser);
+
+//signout
+router.post("/signout", signout);
 
 export default router; // Export the router for use in other parts of the application

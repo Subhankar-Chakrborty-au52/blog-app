@@ -11,6 +11,7 @@ import {
 import { app } from "../firebase";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { useNavigate } from "react-router-dom";
 
 export default function CreatePost() {
   const [file, setFile] = useState(null);
@@ -18,6 +19,9 @@ export default function CreatePost() {
   const [imageUploadError, setImageUploadError] = useState(null);
   const [formData, setFormData] = useState({});
   const [publishError, setPublishError] = useState(null);
+
+  const navigate = useNavigate();
+
   const handleUploadImage = async () => {
     try {
       if (!file) {
@@ -61,6 +65,7 @@ export default function CreatePost() {
       setImageUploadProgress(0);
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -71,7 +76,6 @@ export default function CreatePost() {
         },
         body: JSON.stringify(formData),
       });
-      console.log(res);
       const data = await res.json();
       if (!res.ok) {
         setPublishError(data.message);
@@ -86,6 +90,7 @@ export default function CreatePost() {
       setPublishError("Something went wrong");
     }
   };
+
   return (
     <div className="p-3 max-w-3xl mx-auto min-h-screen">
       <h1 className="text-center text-3xl my-7 font-semibold">Create a post</h1>

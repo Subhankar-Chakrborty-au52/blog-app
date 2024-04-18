@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { Modal, Table, Button } from "flowbite-react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Table, Modal, Button } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { set } from "mongoose";
 
-const DashPosts = () => {
+export default function DashPosts() {
   const { currentUser } = useSelector((state) => state.user);
   const [userPosts, setUserPosts] = useState([]);
   const [showMore, setShowMore] = useState(true);
-  console.log(userPosts);
   const [showModal, setShowModal] = useState(false);
   const [postIdToDelete, setPostIdToDelete] = useState("");
-
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -72,6 +70,7 @@ const DashPosts = () => {
       console.log(error.message);
     }
   };
+
   return (
     <div className="table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
       {currentUser.isAdmin && userPosts.length > 0 ? (
@@ -172,6 +171,4 @@ const DashPosts = () => {
       </Modal>
     </div>
   );
-};
-
-export default DashPosts;
+}

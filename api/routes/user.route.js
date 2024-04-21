@@ -4,6 +4,7 @@ import {
   updateUser,
   deleteUser,
   signout,
+  getUsers,
 } from "../controllers/user.controller.js"; // Import controller functions for user routes
 import { verifyToken } from "../utils/verifyUser.js"; // Import middleware function for verifying user tokens
 
@@ -24,5 +25,6 @@ router.delete("/delete/:userId", verifyToken, deleteUser);
 
 //signout
 router.post("/signout", signout);
+router.get("/getusers", verifyToken, getUsers);
 
 export default router; // Export the router for use in other parts of the application

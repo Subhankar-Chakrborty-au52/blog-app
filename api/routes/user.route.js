@@ -1,10 +1,11 @@
 import express from "express"; // Import the Express framework
 import {
+  deleteUser,
+  getUser,
+  getUsers,
+  signout,
   test,
   updateUser,
-  deleteUser,
-  signout,
-  getUsers,
 } from "../controllers/user.controller.js"; // Import controller functions for user routes
 import { verifyToken } from "../utils/verifyUser.js"; // Import middleware function for verifying user tokens
 
@@ -18,13 +19,11 @@ router.get("/test", test);
 // Route to update user information
 // Requires token verification middleware before executing the updateUser controller function
 router.put("/update/:userId", verifyToken, updateUser);
-
-// Route to delete user account
-// Requires token verification middleware before executing the deleteUser controller function
 router.delete("/delete/:userId", verifyToken, deleteUser);
 
 //signout
 router.post("/signout", signout);
 router.get("/getusers", verifyToken, getUsers);
+router.get("/:userId", getUser);
 
 export default router; // Export the router for use in other parts of the application
